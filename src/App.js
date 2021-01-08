@@ -1,39 +1,14 @@
 import React from "react";
 
-import {
-  AmplifyAuthenticator,
-  AmplifySignOut,
-  AmplifySignUp,
-  AmplifySignIn,
-} from "@aws-amplify/ui-react";
-
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
+import Home from "./page/home";
+import Login from "./page/login";
+import Privacy from "./page/privacy";
+import Terms from "./page/termsandcondition";
 
-const form = (
-  <div>
-    <AmplifyAuthenticator usernameAlias="email">
-      <AmplifySignUp
-        slot="sign-up"
-        usernameAlias="email"
-        formFields={[
-          {
-            type: "email",
-            label: "Email",
-            placeholder: "Email",
-            required: true,
-          },
-          {
-            type: "password",
-            label: "Password",
-            placeholder: "Password",
-            required: true,
-          },
-        ]}
-      />
-      <AmplifySignIn slot="sign-in" usernameAlias="email" />
-    </AmplifyAuthenticator>
-  </div>
-);
+import Index from "./components";
+
+import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -47,11 +22,20 @@ function App() {
   }, []);
 
   return authState === AuthState.SignedIn && user ? (
-    <div className="App">
-      <AmplifySignOut />
-    </div>
+    <Switch>
+      <Route exact component={Index} path="/" />
+      <Redirect path="/**" to="/" />;
+    </Switch>
   ) : (
-    form
+    <>
+      <Switch>
+        <Route exact component={Home} path="/home" />
+        <Route exact component={Login} path="/login" />
+        <Route exact component={Privacy} path="/privacy" />
+        <Route exact component={Terms} path="/termsandcondition" />
+        <Redirect path="/**" to="/home" />;
+      </Switch>
+    </>
   );
 }
 
