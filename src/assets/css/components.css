@@ -1,0 +1,27 @@
+.home{
+    margin-left: 200px;
+    width: 70%;
+}
+
+.home-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.home-title{
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.home-img{
+    width: 200px;
+}
+
+.home-paragraph{
+    width: 80%;
+    margin: 12px 20%;
+}
