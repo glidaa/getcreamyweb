@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
+import { AuthState } from "@aws-amplify/ui-components";
 import Home from "./page/home";
 import Login from "./page/login";
 import Privacy from "./page/privacy";
@@ -10,16 +10,11 @@ import Index from "./components";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
-function App() {
-  const [user, setUser] = React.useState({});
-  const [authState, setAuthState] = React.useState();
+import { AuthContext } from './contexts/auth-context'
 
-  React.useEffect(() => {
-    onAuthUIStateChange((nextAuthState, authData) => {
-      setAuthState(nextAuthState);
-      setUser(authData);
-    });
-  }, []);
+function App() {
+
+  const {authState,user} = useContext(AuthContext)
 
   return authState === AuthState.SignedIn && user ? (
     <Switch>

@@ -8,12 +8,18 @@ import { BrowserRouter } from "react-router-dom";
 import Amplify from "aws-amplify";
 import config from "./aws-exports";
 
+import AuthContextProvider from './contexts/auth-context'
+
+
 Amplify.configure(config);
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <AuthContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </AuthContextProvider>
+  ,
   document.getElementById("root")
 );
 
